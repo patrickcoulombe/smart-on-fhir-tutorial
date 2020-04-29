@@ -32,6 +32,8 @@
 
           if (proc) {
             procMessage = "Found Procedure(s): " + proc
+          } else {
+            procMessage = "Could not find any Procedures for this patient."
           }
 
           var p = defaultPatient();
