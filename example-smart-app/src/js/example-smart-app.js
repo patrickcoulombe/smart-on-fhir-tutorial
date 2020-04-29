@@ -34,14 +34,11 @@
             procMessage = "Found Procedure(s): " + proc
           }
 
-          var height = byCodes('8302-2');
-
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
           p.fname = fname;
           p.lname = lname;
-          p.height = getQuantityValueAndUnit(height[0]);
           p.procedures = procMessage;
 
           ret.resolve(p);
