@@ -11,9 +11,9 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
+
         var proc = smart.patient.api.fetchAll({
-          type: 'Procedure',
-          subject: { $type: 'Patient', name: patient.name[0] }
+          type: 'Procedure' 
         });
 
         $.when(pt, proc).fail(onError);
