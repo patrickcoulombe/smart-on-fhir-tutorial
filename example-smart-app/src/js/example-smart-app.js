@@ -45,9 +45,9 @@
             for (i = 0; i < procs.length; i++) {
               procedureData += rowStart + procedureIdHeader + cellStart + procs[i].id + cellEnd + rowEnd;
               procedureData += rowStart + procedureExtIdHeader + cellStart +  procs[i].identifier + cellEnd + rowEnd;
-              procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding + cellEnd + rowEnd;
-              procedureData += rowStart + cellStart + procs[i].code.display + cellEnd + rowEnd;
-              procedureData += rowStart + cellStart + procedureStatusHeader + procs[i].status + cellEnd + rowEnd;
+              procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding.code + cellEnd + rowEnd;
+              procedureData += rowStart + cellStart + cellEnd + cellStart + procs[i].code.coding.display + cellEnd + rowEnd;
+              procedureData += rowStart + procedureStatusHeader + cellStart + procs[i].status + cellEnd + rowEnd;
               procedureData += rowStart + rowEnd;
             }
           } else {
