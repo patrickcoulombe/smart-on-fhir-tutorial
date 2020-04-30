@@ -20,7 +20,7 @@
 
         $.when(pt, procs).done(function (patient, procs) {
           var gender = patient.gender;
-          var procMessage = '';
+          var procedureData = '';
 
           var fname = '';
           var lname = '';
@@ -30,16 +30,25 @@
             lname = patient.name[0].family.join(' ');
           }
 
+          const rowStart = "<tr>";
+          const procedureIdHeader = "<th>Procedure ID: </th>";
+          const procedureExtIdHeader = "<th>External Identifier: </th>";
+          const procedureCodeHeader = "<th>Procedure Code: </th>";
+          const procedureStatusHeader = "<th>Status: </th>";
+          const rowEnd = "</tr>"
+
           if (procs) {
-            procMessage = "Found Procedure(s): "
+            procedureData = rowStart + "Found Procedure(s):" + rowEnd;
+
             procs.forEach((procedure) => {
-              procMessage += "\n Procedure ID: " + procedure.id;
-              procMessage += "\n External Identifier: " + procedure.identifier;
-              procMessage += "\n Procedure Code: " +procedure.code;
-              procMessage += "\n Status: " + procedure.status +"\n";
+              procedureData += rowStart + procedureIdHeader + procedure.id + rowEnd;
+              procedureData += rowStart + procedureExtIdHeader + procedure.identifier + rowEnd;
+              procedureData += rowStart + procedureCodeHeader + procedure.code.coding + rowEnd;
+              procedureData += rowStart + procedure.code.display + rowEnd;
+              procedureData += rowStart + procedureStatusHeader + procedure.status + rowEnd;
             });
           } else {
-            procMessage = "Could not find any Procedures for this patient."
+            procedureData = "Could not find any Procedures for this patient."
           }
 
           var p = defaultPatient();
@@ -47,7 +56,7 @@
           p.gender = gender;
           p.fname = fname;
           p.lname = lname;
-          p.procedures = procMessage;
+          p.procedures = procedureData;
 
           ret.resolve(p);
         });
@@ -108,7 +117,7 @@
     $('#gender').html(p.gender);
     $('#birthdate').html(p.birthdate);
     $('#height').html(p.height);
-    $('#procMessage').html(p.procedures);
+    $('#procedures').html(p.procedures);
     document.title = "Case# - " + p.lname;
   };
 
