@@ -13,7 +13,7 @@
         var pt = patient.read();
 
         var proc = smart.patient.api.fetchAll({
-          type: 'Observation' 
+          type: 'Procedure' 
         });
 
         $.when(pt, proc).fail(onError);
@@ -31,7 +31,7 @@
           }
 
           if (proc) {
-            procMessage = "Found Observation(s): " + proc
+            procMessage = "Found Procedure(s): " + proc
           } else {
             procMessage = "Could not find any Procedures for this patient."
           }
