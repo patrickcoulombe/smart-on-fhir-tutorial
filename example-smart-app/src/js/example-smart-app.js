@@ -46,7 +46,7 @@
               procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding[0].code + cellEnd +
                 cellStart + "<i> - " + procs[i].code.coding[0].display + "</i>" + cellEnd + rowEnd;
               procedureData += rowStart + procedureStatusHeader + cellStart + procs[i].status + cellEnd + rowEnd;
-              procedureData += rowStart + rowEnd;
+              procedureData += "<br/>";
             }
           } else {
             procedureData = "Could not find any Procedures for this patient."
