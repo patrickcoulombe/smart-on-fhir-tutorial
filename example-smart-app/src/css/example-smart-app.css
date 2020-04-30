@@ -3,7 +3,7 @@ th, td {
   text-align: left;
 }
 
-td.lastcell {
+tr.lastrow {
   padding-bottom: 20px;
 }
 
