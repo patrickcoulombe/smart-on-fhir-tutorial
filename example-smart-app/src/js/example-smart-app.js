@@ -13,7 +13,7 @@
         var pt = patient.read();
 
         var procs = smart.patient.api.fetchAll({
-          type: 'Procedure' 
+          type: 'Procedure'
         });
 
         $.when(pt, procs).fail(onError);
@@ -43,8 +43,8 @@
 
             for (i = 0; i < procs.length; i++) {
               procedureData += rowStart + procedureIdHeader + cellStart + procs[i].id + cellEnd + rowEnd;
-              procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding[0].code + cellEnd + rowEnd;
-              procedureData += rowStart + cellStart + cellEnd + cellStart + procs[i].code.coding[0].display + cellEnd + rowEnd;
+              procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding[0].code + cellEnd +
+                cellStart + "<i> - " + procs[i].code.coding[0].display + "</i>" + cellEnd + rowEnd;
               procedureData += rowStart + procedureStatusHeader + cellStart + procs[i].status + cellEnd + rowEnd;
               procedureData += rowStart + rowEnd;
             }
