@@ -12,13 +12,13 @@
         var patient = smart.patient;
         var pt = patient.read();
 
-        var proc = smart.patient.api.fetchAll({
+        var procs = smart.patient.api.fetchAll({
           type: 'Procedure' 
         });
 
-        $.when(pt, proc).fail(onError);
+        $.when(pt, procs).fail(onError);
 
-        $.when(pt, proc).done(function (patient, proc) {
+        $.when(pt, procs).done(function (patient, procs) {
           var gender = patient.gender;
           var procMessage = '';
 
@@ -30,8 +30,14 @@
             lname = patient.name[0].family.join(' ');
           }
 
-          if (proc) {
-            procMessage = "Found Procedure(s): " + proc
+          if (procs) {
+            procMessage = "Found Procedure(s): "
+            procs.forEach(procedure){
+              procMessage += "\n Procedure ID: " + procedure.id;
+              procMessage += "\n External Identifier: " + procedure.identifier;
+              procMessage += "\n Procedure Code: " +procedure.code;
+              procMessage += "\n Status: " + procedure.status +"\n";
+            }
           } else {
             procMessage = "Could not find any Procedures for this patient."
           }
