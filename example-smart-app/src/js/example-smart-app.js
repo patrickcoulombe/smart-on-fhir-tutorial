@@ -40,13 +40,14 @@
           if (procs) {
             procedureData = rowStart + "Found Procedure(s):" + rowEnd;
 
-            procs.forEach((procedure) => {
-              procedureData += rowStart + procedureIdHeader + procedure.id + rowEnd;
-              procedureData += rowStart + procedureExtIdHeader + procedure.identifier + rowEnd;
-              procedureData += rowStart + procedureCodeHeader + procedure.code.coding + rowEnd;
-              procedureData += rowStart + procedure.code.display + rowEnd;
-              procedureData += rowStart + procedureStatusHeader + procedure.status + rowEnd;
-            });
+            for (i = 0; i < procs.length; i++) {
+              procedureData += rowStart + procedureIdHeader + procs[i].id + rowEnd;
+              procedureData += rowStart + procedureExtIdHeader + procs[i].identifier + rowEnd;
+              procedureData += rowStart + procedureCodeHeader + procs[i].code.coding + rowEnd;
+              procedureData += rowStart + procs[i].code.display + rowEnd;
+              procedureData += rowStart + procedureStatusHeader + procs[i].status + rowEnd;
+              proecdureData += rowStart + rowEnd;
+            }
           } else {
             procedureData = "Could not find any Procedures for this patient."
           }
