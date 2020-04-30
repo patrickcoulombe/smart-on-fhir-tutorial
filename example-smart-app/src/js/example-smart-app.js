@@ -36,7 +36,7 @@
           const procedureStatusHeader = "<th>Status: </th>";
           const rowEnd = "</tr>"
           const cellStart = "<td>";
-          const finalRowStart = "<tr class='lastrow'>"
+          const finalRowStart = "<tr class='lastRow'>"
           const cellEnd = "</td>";
 
           if (procs) {
