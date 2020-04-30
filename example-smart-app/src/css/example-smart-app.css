@@ -3,6 +3,10 @@ th, td {
   text-align: left;
 }
 
+td.lastcell {
+  padding-bottom: 20px;
+}
+
 body {
   margin: 0;
 }

@@ -36,6 +36,7 @@
           const procedureStatusHeader = "<th>Status: </th>";
           const rowEnd = "</tr>"
           const cellStart = "<td>";
+          const finalCellStart = "<td class='lastcell'>"
           const cellEnd = "</td>";
 
           if (procs) {
@@ -45,8 +46,7 @@
               procedureData += rowStart + procedureIdHeader + cellStart + procs[i].id + cellEnd + rowEnd;
               procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding[0].code + cellEnd +
                 cellStart + "<i> - " + procs[i].code.coding[0].display + "</i>" + cellEnd + rowEnd;
-              procedureData += rowStart + procedureStatusHeader + cellStart + procs[i].status + cellEnd + rowEnd;
-              procedureData += "<br/>";
+              procedureData += rowStart + procedureStatusHeader + finalCellStart + procs[i].status + cellEnd + rowEnd;
             }
           } else {
             procedureData = "Could not find any Procedures for this patient."
