@@ -32,12 +32,12 @@
 
           if (procs) {
             procMessage = "Found Procedure(s): "
-            procs.forEach(procedure){
+            procs.forEach((procedure) => {
               procMessage += "\n Procedure ID: " + procedure.id;
               procMessage += "\n External Identifier: " + procedure.identifier;
               procMessage += "\n Procedure Code: " +procedure.code;
               procMessage += "\n Status: " + procedure.status +"\n";
-            }
+            });
           } else {
             procMessage = "Could not find any Procedures for this patient."
           }
