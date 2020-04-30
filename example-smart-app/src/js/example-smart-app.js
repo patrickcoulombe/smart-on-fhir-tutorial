@@ -36,16 +36,18 @@
           const procedureCodeHeader = "<th>Procedure Code: </th>";
           const procedureStatusHeader = "<th>Status: </th>";
           const rowEnd = "</tr>"
+          const cellStart = "<td>";
+          const cellEnd = "</td>";
 
           if (procs) {
             procedureData = rowStart + "Found Procedure(s):" + rowEnd;
 
             for (i = 0; i < procs.length; i++) {
-              procedureData += rowStart + procedureIdHeader + procs[i].id + rowEnd;
-              procedureData += rowStart + procedureExtIdHeader + procs[i].identifier + rowEnd;
-              procedureData += rowStart + procedureCodeHeader + procs[i].code.coding + rowEnd;
-              procedureData += rowStart + procs[i].code.display + rowEnd;
-              procedureData += rowStart + procedureStatusHeader + procs[i].status + rowEnd;
+              procedureData += rowStart + procedureIdHeader + cellStart + procs[i].id + cellEnd + rowEnd;
+              procedureData += rowStart + procedureExtIdHeader + cellStart +  procs[i].identifier + cellEnd + rowEnd;
+              procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding + cellEnd + rowEnd;
+              procedureData += rowStart + cellStart + procs[i].code.display + cellEnd + rowEnd;
+              procedureData += rowStart + cellStart + procedureStatusHeader + procs[i].status + cellEnd + rowEnd;
               procedureData += rowStart + rowEnd;
             }
           } else {
