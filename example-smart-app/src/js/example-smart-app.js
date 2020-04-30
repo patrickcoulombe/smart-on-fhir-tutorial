@@ -32,7 +32,6 @@
 
           const rowStart = "<tr>";
           const procedureIdHeader = "<th>Procedure ID: </th>";
-          const procedureExtIdHeader = "<th>External Identifier: </th>";
           const procedureCodeHeader = "<th>Procedure Code: </th>";
           const procedureStatusHeader = "<th>Status: </th>";
           const rowEnd = "</tr>"
@@ -44,9 +43,8 @@
 
             for (i = 0; i < procs.length; i++) {
               procedureData += rowStart + procedureIdHeader + cellStart + procs[i].id + cellEnd + rowEnd;
-              procedureData += rowStart + procedureExtIdHeader + cellStart +  procs[i].identifier + cellEnd + rowEnd;
-              procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding.code + cellEnd + rowEnd;
-              procedureData += rowStart + cellStart + cellEnd + cellStart + procs[i].code.coding.display + cellEnd + rowEnd;
+              procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding[0].code + cellEnd + rowEnd;
+              procedureData += rowStart + cellStart + cellEnd + cellStart + procs[i].code.coding[0].display + cellEnd + rowEnd;
               procedureData += rowStart + procedureStatusHeader + cellStart + procs[i].status + cellEnd + rowEnd;
               procedureData += rowStart + rowEnd;
             }
