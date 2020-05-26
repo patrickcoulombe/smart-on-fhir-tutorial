@@ -17,12 +17,12 @@
         var patient = smart.patient;
         var pt = patient.read();
 
-        var procs = smart.patient.api.search({
+        var procs = smart.patient.api.fetchAll({
           type: 'Procedure',
           encounter: "Encounter/" + encounter
         });
 
-        if (!procs) {
+        if (!procs || (procs && procs.length > 0)) {
           procs = smart.patient.api.fetchAll({
             type: 'Procedure'
           });
