@@ -9,22 +9,17 @@
 
     function onReady(smart) {
 
+      if (smart.hasOwnProperty('tokenResponse')) {
+        var encounter = smart.tokenResponse.encounter;
+      }
+
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
 
-        if (smart.hasOwnProperty('tokenResponse')) {
-          var encounter = smart.tokenResponse.encounter;
-          var procs = smart.patient.api.fetchAll({
-            type: 'Procedure',
-            encounter: encounter
-          });
-        } else {
-          var procs = smart.patient.api.fetchAll({
-            type: 'Procedure'
-          });
-        }
-
+        var procs = smart.patient.api.fetchAll({
+          type: 'Procedure'
+        });
 
         $.when(pt, procs).fail(onError);
 
@@ -44,6 +39,7 @@
           const procedureIdHeader = "<th>Procedure ID: </th>";
           const procedureCodeHeader = "<th>Procedure Code: </th>";
           const procedureStatusHeader = "<th>Status: </th>";
+          const procedureEncounterHeader = "<th>Encounter: </th>";
           const rowEnd = "</tr>"
           const cellStart = "<td>";
           const finalRowStart = "<tr class='lastRow'>"
@@ -54,14 +50,12 @@
 
             for (i = 0; i < procs.length; i++) {
               procedureData += rowStart + procedureIdHeader + cellStart + procs[i].id + cellEnd + rowEnd;
+              procedureData += rowStart + procedureEncounterHeader + cellStart + procs[i].encounter + cellEnd + rowEnd;
               procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding[0].code +
                 "<i> - " + procs[i].code.coding[0].display + "</i>" + cellEnd + rowEnd;
               procedureData += finalRowStart + procedureStatusHeader + cellStart + procs[i].status + cellEnd + rowEnd;
             }
 
-            if (encounter) {
-              procedureData = "Procedures were retrieved via encounter: " + encounter;
-            }
           } else {
             procedureData = "Could not find any Procedures for this patient."
           }
@@ -73,6 +67,10 @@
           p.lname = lname;
           p.procedures = procedureData;
 
+          if (encounter) {
+            p.encounter = encounter;
+          }
+          
           ret.resolve(p);
         });
       } else {
@@ -92,41 +90,15 @@
       gender: { value: '' },
       birthdate: { value: '' },
       height: { value: '' },
-      procedures: { value: '' }
+      procedures: { value: '' },
+      encounter: { value: '' }
     };
-  }
-
-  function getBloodPressureValue(BPObservations, typeOfPressure) {
-    var formattedBPObservations = [];
-    BPObservations.forEach(function (observation) {
-      var BP = observation.component.find(function (component) {
-        return component.code.coding.find(function (coding) {
-          return coding.code == typeOfPressure;
-        });
-      });
-      if (BP) {
-        observation.valueQuantity = BP.valueQuantity;
-        formattedBPObservations.push(observation);
-      }
-    });
-
-    return getQuantityValueAndUnit(formattedBPObservations[0]);
-  }
-
-  function getQuantityValueAndUnit(ob) {
-    if (typeof ob != 'undefined' &&
-      typeof ob.valueQuantity != 'undefined' &&
-      typeof ob.valueQuantity.value != 'undefined' &&
-      typeof ob.valueQuantity.unit != 'undefined') {
-      return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
-    } else {
-      return undefined;
-    }
   }
 
   window.drawVisualization = function (p) {
     $('#holder').show();
     $('#loading').hide();
+    $('#encounter').html(p.encounter);
     $('#fname').html(p.fname);
     $('#lname').html(p.lname);
     $('#gender').html(p.gender);
