@@ -19,7 +19,7 @@
 
         var procs = smart.patient.api.search({
           type: 'Procedure',
-          encounter: encounter
+          encounter: "Encounter/" + encounter
         });
 
         if (!procs) {
