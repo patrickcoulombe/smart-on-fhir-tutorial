@@ -17,9 +17,16 @@
         var patient = smart.patient;
         var pt = patient.read();
 
-        var procs = smart.patient.api.fetchAll({
-          type: 'Procedure'
+        var procs = smart.patient.api.search({
+          type: 'Procedure',
+          encounter: encounter
         });
+
+        if (!procs) {
+          procs = smart.patient.api.fetchAll({
+            type: 'Procedure'
+          });
+        }
 
         $.when(pt, procs).fail(onError);
 
@@ -70,7 +77,7 @@
           if (encounter) {
             p.encounter = encounter;
           }
-          
+
           ret.resolve(p);
         });
       } else {
