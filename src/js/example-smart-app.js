@@ -39,7 +39,7 @@
           const procedureIdHeader = "<th>Procedure ID: </th>";
           const procedureCodeHeader = "<th>Procedure Code: </th>";
           const procedureStatusHeader = "<th>Status: </th>";
-          const procedureEncounterHeader = "<th>Encounter: </th>";
+          const procedureEncounterHeader = "<th>Encounter Reference: </th>";
           const rowEnd = "</tr>"
           const cellStart = "<td>";
           const finalRowStart = "<tr class='lastRow'>"
@@ -50,7 +50,7 @@
 
             for (i = 0; i < procs.length; i++) {
               procedureData += rowStart + procedureIdHeader + cellStart + procs[i].id + cellEnd + rowEnd;
-              procedureData += rowStart + procedureEncounterHeader + cellStart + procs[i].encounter + cellEnd + rowEnd;
+              procedureData += rowStart + procedureEncounterHeader + cellStart + procs[i].encounter.reference + cellEnd + rowEnd;
               procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding[0].code +
                 "<i> - " + procs[i].code.coding[0].display + "</i>" + cellEnd + rowEnd;
               procedureData += finalRowStart + procedureStatusHeader + cellStart + procs[i].status + cellEnd + rowEnd;
