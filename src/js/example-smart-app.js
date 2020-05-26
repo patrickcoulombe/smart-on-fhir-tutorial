@@ -8,13 +8,23 @@
     }
 
     function onReady(smart) {
+
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
 
-        var procs = smart.patient.api.fetchAll({
-          type: 'Procedure'
-        });
+        if (smart.hasOwnProperty('tokenResponse')) {
+          var encounter = smart.tokenResponse.encounter;
+          var procs = smart.patient.api.fetchAll({
+            type: 'Procedure',
+            encounter: encounter
+          });
+        } else {
+          var procs = smart.patient.api.fetchAll({
+            type: 'Procedure'
+          });
+        }
+
 
         $.when(pt, procs).fail(onError);
 
@@ -45,8 +55,12 @@
             for (i = 0; i < procs.length; i++) {
               procedureData += rowStart + procedureIdHeader + cellStart + procs[i].id + cellEnd + rowEnd;
               procedureData += rowStart + procedureCodeHeader + cellStart + procs[i].code.coding[0].code +
-                 "<i> - " + procs[i].code.coding[0].display + "</i>" + cellEnd + rowEnd;
+                "<i> - " + procs[i].code.coding[0].display + "</i>" + cellEnd + rowEnd;
               procedureData += finalRowStart + procedureStatusHeader + cellStart + procs[i].status + cellEnd + rowEnd;
+            }
+
+            if (encounter) {
+              procedureData = "Procedures were retrieved via encounter: " + encounter;
             }
           } else {
             procedureData = "Could not find any Procedures for this patient."
