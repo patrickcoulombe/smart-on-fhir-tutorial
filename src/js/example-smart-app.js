@@ -22,12 +22,6 @@
           encounter: "Encounter/" + encounter
         });
 
-        if (!procs || (procs && procs.length > 0)) {
-          procs = smart.patient.api.fetchAll({
-            type: 'Procedure'
-          });
-        }
-
         $.when(pt, procs).fail(onError);
 
         $.when(pt, procs).done(function (patient, procs) {
