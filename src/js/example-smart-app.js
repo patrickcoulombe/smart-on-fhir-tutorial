@@ -13,6 +13,7 @@
         var encounter = smart.tokenResponse.encounter;
       }
 
+      var info = "";
       loadIframe(info);
 
       if (smart.hasOwnProperty('patient')) {
