@@ -13,6 +13,9 @@
         var encounter = smart.tokenResponse.encounter;
       }
 
+//https://demo.tecsys.com/itopia_98x_all/portal/home?resourceName_1=sms_usage_order.case_doc.or.integrated&goToDetail=1&criteriaMuid=sms%7Cusage_order%7CFHS%7C1
+
+
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
