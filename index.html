@@ -1,35 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" height="100%">
-  <head>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-    <title>Example-SMART-App</title>
 
-    <link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
-    <style>  
-    body {    
-        margin: 0;
-        height: 100%;
-        width: 100%;
+<head>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <title>Example-SMART-App</title>
+
+  <link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
+  <style>
+    html {
+
+      overflow: auto;
+
     }
+
+
+
+    html,
+
+    body,
+
+    div,
+
     iframe {
-        display: block;
-        background: #000;
-        border: none;
-        height: 100vh;
-        width: 100vw;
+
+      margin: 0px;
+
+      padding: 0px;
+
+      height: 100%;
+
+      border: none;
+
     }
-    </style>
-    <!--
+
+
+
+    iframe {
+
+      display: block;
+
+      width: 100%;
+
+      border: none;
+
+      overflow-y: auto;
+
+      overflow-x: hidden;
+
+    }
+  </style>
+  <!--
       Temporarily disable cerner-smart-embeddable-lib
       <link rel='stylesheet' type='text/css' href='./lib/css/cerner-smart-embeddable-lib-1.0.0.min.css'>
     -->
-  </head>
-  <body>
+</head>
 
-    <!--TODO: fix size--> 
-    <iframe id="mainWindow" src="about:blank" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
-    <!--<div id="patientInfo" style="display: none;">
+<body>
+
+  <!--TODO: fix size-->
+  <iframe id="mainWindow" src="about:blank" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%"
+    width="100%"></iframe>
+  <!--<div id="patientInfo" style="display: none;">
     <div id='errors'>
     </div>
     <div id="loading" class="spinner">
@@ -72,36 +104,37 @@
       <p>This page automatically launches Case Documentation for a given Patient(?) Case#(?)</p>
     </div>
   </div>-->
-    <!-- Required JS files to enable this page to embed within an MPage -->
-    <!--
+  <!-- Required JS files to enable this page to embed within an MPage -->
+  <!--
       Temporarily disable cerner-smart-embeddable-lib
       <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
       <script src='./lib/js/cerner-smart-embeddable-lib-1.0.0.min.js'></script>
     -->
 
-    <!-- Application-level javascript-->
-    <script src='./src/js/example-smart-app.js'></script>
+  <!-- Application-level javascript-->
+  <script src='./src/js/example-smart-app.js'></script>
 
-    <!-- FHIR Client JS Library -->
-    <script src='./lib/js/fhir-client-v0.1.12.js'></script>
+  <!-- FHIR Client JS Library -->
+  <script src='./lib/js/fhir-client-v0.1.12.js'></script>
 
-    <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
-    <!-- https://github.com/cerner/fhir-client-cerner-additions -->
-    <script src='./lib/js/fhir-client-cerner-additions-1.0.0.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-      extractData().then(
-        //Display Patient Demographics and Observations if extractData was success
-        function(p) {
-          drawVisualization(p);
-        },
+  <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
+  <!-- https://github.com/cerner/fhir-client-cerner-additions -->
+  <script src='./lib/js/fhir-client-cerner-additions-1.0.0.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    extractData().then(
+      //Display Patient Demographics and Observations if extractData was success
+      function (p) {
+        drawVisualization(p);
+      },
 
-        //Display 'Failed to call FHIR Service' if extractData failed
-        function() {
-          $('#loading').hide();
-          $('#errors').html('<p> Failed to call FHIR Service </p>');
-        }
-      );
-    </script>
-  </body>
+      //Display 'Failed to call FHIR Service' if extractData failed
+      function () {
+        $('#loading').hide();
+        $('#errors').html('<p> Failed to call FHIR Service </p>');
+      }
+    );
+  </script>
+</body>
+
 </html>
