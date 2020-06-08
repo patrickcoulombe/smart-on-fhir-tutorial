@@ -88,6 +88,7 @@
   };
 
   function toggleDisplay() {
+    // May need to be block and not inline
     var iframe = document.getElementById("mainWindow");
     var patientInfo = document.getElementById("patientInfo");
 
