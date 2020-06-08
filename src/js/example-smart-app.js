@@ -13,8 +13,7 @@
         var encounter = smart.tokenResponse.encounter;
       }
 
-//https://demo.tecsys.com/itopia_98x_all/portal/home?resourceName_1=sms_usage_order.case_doc.or.integrated&goToDetail=1&criteriaMuid=sms%7Cusage_order%7CFHS%7C1
-
+      loadIframe(info);
 
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
@@ -86,6 +85,35 @@
     return ret.promise();
 
   };
+
+  function toggleDisplay() {
+    var iframe = document.getElementById("mainWindow");
+    var patientInfo = document.getElementById("patientInfo");
+
+    if (patientInfo.style.display == "inline") {
+      iframe.style.display = "inline";
+      patientInfo.style.display = "none";
+
+    }
+    else {
+      iframe.style.display = "none";
+      patientInfo.style.display = "inline";
+
+    }
+  
+  }
+  
+  function loadIframe(info) {
+     var iframe = document.getElementById("mainWindow");
+     //Build URL dynamically
+//https://demo.tecsys.com/itopia_98x_all/portal/home?resourceName_1=sms_usage_order.case_doc.or.integrated&goToDetail=1&criteriaMuid=sms%7Cusage_order%7CFHS%7C1
+
+     var url = "https://demo.tecsys.com/itopia_98x_all/portal/home?resourceName_1=sms_usage_order.case_doc.or.integrated&goToDetail=1";
+    url += "&criteriaMuid=sms%7Cusage_order";
+    url += encodeURIComponent("=FHS|1");
+
+    iframe.src = url;
+  }
 
   function defaultPatient() {
     return {
