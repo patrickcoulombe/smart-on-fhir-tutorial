@@ -111,8 +111,8 @@
 
      var url = "https://demo.tecsys.com/itopia_98x_all/portal/home?resourceName_1=sms_usage_order.case_doc.or.integrated&goToDetail=1";
     url += "&criteriaMuid=sms%7Cusage_order";
-    url += encodeURIComponent("=FHS|1");
-
+    url += encodeURIComponent("|FHS|1");
+    console.log(url);
     iframe.src = url;
   }
 
